@@ -14,13 +14,9 @@ using pushNotification.Models;
 
 namespace pushNotification.Notifications
 {
-    //[Authorize] 
     [HubName("notificationHub")]
     public class NotificationHub : Hub
     {
-
-
-
         [HubMethodName("sendNotifications")]
         public void SendNotifications()
         {
@@ -46,7 +42,7 @@ namespace pushNotification.Notifications
                         }
                         var reader = cmd.ExecuteReader();
                         dtbl.Load(reader);
-                        List<News> lists = new List<News>();
+                        List<News> listnews = new List<News>();
                         if (dtbl.Rows.Count > 0)
                         {
                             foreach (DataRow dt in dtbl.Rows)
@@ -57,7 +53,7 @@ namespace pushNotification.Notifications
 
                                 string Post = dt["Content"].ToString();
 
-                                lists.Add(new News()
+                                listnews.Add(new News()
                                 {
                                     NewsID = Id,
                                     Content = Post,
@@ -68,22 +64,9 @@ namespace pushNotification.Notifications
                             }
                         }
                         conn.Close();
-                        //Get the Connection Id Mapping From Database with Member //Rewrite this method to add the country or the city 
-                        //var db = new MemberContext();
-
-                        //foreach(var item in alerts)
-                        //{
-                        //    //Dapper
-                        //    //var dapConnIds = dapperMember.GetListConnectionsByAddress(item.LooserAddress);
-
-                        //    //DbContext
-                        //    var users =(from u in db.Members where u.Address.Contains(item.LooserAddress) select u.UserName).ToList();
-
-                        //    IHubContext context = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
-                        //    context.Clients.Users(users).RecieveNotification(item);
-                        //}
+                 
                         IHubContext context = GlobalHost.ConnectionManager.GetHubContext<NotificationHub>();
-                        context.Clients.All.RecieveNotification(lists);
+                        context.Clients.All.RecieveNotification(listnews);
 
                     }
                     catch (Exception)
