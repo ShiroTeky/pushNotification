@@ -8,7 +8,7 @@ Les notions mises en évidence sont:
  * SignalR :Side-Client et Side-Server
 
 ## Création de la base de donnée pushNewsDB et de la table News
-'''sh
+```sh
     CREATE DATABASE pushNewsDB
     CREATE TABLE dbo.News
     (
@@ -19,12 +19,12 @@ Les notions mises en évidence sont:
     )
     ALTER TABLE dbo.News
     ADD CONSTRAINT PK_News PRIMARY KEY (NewsID)
-'''
+```
 
 ## Activiation du Service Broker
-'''sh
+```sh
    ALTER DATABASE pushNewsDB SET ENABLE_BROKER WITH ROLLBACK IMMEDIATE
-'''
+```
 
 ## Contenu de la classe NotificationHub
 ```sh 
