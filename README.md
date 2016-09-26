@@ -97,7 +97,6 @@ Les notions mises en évidence sont:
         {
             if (e.Info == SqlNotificationInfo.Insert)
             {
-                var objet = sender as SqlDependency;
                 NotificationHub nHub = new NotificationHub();
                 nHub.SendNotifications();
             }
